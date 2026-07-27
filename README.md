@@ -20,34 +20,34 @@ reproduction configurations, frozen manifests, and compact result records.
 
 ## Method
 
-Let $\(H_D(t)\)$ denote histories selected by the frozen causal-driver manifest
-and \(H_Y(t)\) denote the target history. SF-CDI learns separate
+Let $H_D(t)$ denote histories selected by the frozen causal-driver manifest
+and $H_Y(t)$ denote the target history. SF-CDI learns separate
 representations:
 
-\[
+$$
 Z_D = E_D(H_D(t)), \qquad Z_Y = E_Y(H_Y(t)).
-\]
+$$
 
 During the adjustment phase, the predictor minimizes future forecasting error
 and cross-covariance while the driver encoder maximizes the error of an
 adversary that reconstructs selected target-history lags:
 
-\[
+$$
 \mathcal{L}_{\mathrm{main}}
 = \mathcal{L}_{\mathrm{future}}
 + \lambda_{\mathrm{cov}}\mathcal{L}_{\mathrm{cov}}
 - \lambda_{\mathrm{adv}}\mathcal{L}_{\mathrm{adv}}.
-\]
+$$
 
 After adjustment, every driver-representation parameter is removed from the
-forecast optimizer, its gradients are cleared, and \(Z_D\) is detached from
+forecast optimizer, its gradients are cleared, and $Z_D$ is detached from
 the future-target graph. The static phase trains only the target path and the
 decoder. For the MetroPT-3 instantiation, the forecast has the explicit form
 
-\[
+$$
 \widehat{Y}^{+}
 = Y_t + f_Y(Z_Y) + f_D([Z_D,Z_Y]),
-\]
+$$
 
 where the final term is the driver contribution conditional on the current
 target state.
