@@ -17,10 +17,10 @@ SF-CDI combines:
 
 The public repository contains the final paper-facing implementation,
 reproduction configurations, frozen manifests, and compact result records.
-Raw datasets and trained checkpoints are not distributed.
 
 ## Method
 
+$ H_D(t) $
 Let \(H_D(t)\) denote histories selected by the frozen causal-driver manifest
 and \(H_Y(t)\) denote the target history. SF-CDI learns separate
 representations:
