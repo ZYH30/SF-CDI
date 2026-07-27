@@ -33,10 +33,7 @@ and cross-covariance while the driver encoder maximizes the error of an
 adversary that reconstructs selected target-history lags:
 
 $$
-\mathcal{L}_{\mathrm{main}}
-= \mathcal{L}_{\mathrm{future}}
-+ \lambda_{\mathrm{cov}}\mathcal{L}_{\mathrm{cov}}
-- \lambda_{\mathrm{adv}}\mathcal{L}_{\mathrm{adv}}.
+\mathcal{L}_{\mathrm{main}} = \mathcal{L}_{\mathrm{future}} + \lambda_{\mathrm{cov}}\mathcal{L}_{\mathrm{cov}} - \lambda_{\mathrm{adv}}\mathcal{L}_{\mathrm{adv}}.
 $$
 
 After adjustment, every driver-representation parameter is removed from the
