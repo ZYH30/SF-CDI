@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated paper and this repository."
+title: "SF-CDI: Static-Frozen Causal Driver Innovation"
+type: software
+version: 1.0.0
+date-released: 2026-07-27
+authors:
+  - family-names: "ZYH30"
+repository-code: "https://github.com/ZYH30/SF-CDI"
+license: MIT

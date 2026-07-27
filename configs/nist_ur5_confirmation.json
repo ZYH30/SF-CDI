@@ -1,0 +1,110 @@
+{
+  "seed": 20260722,
+  "device": "cuda",
+  "output_root": "outputs",
+  "evaluation": {
+    "split": "test",
+    "purpose": "historically_exposed_frozen_directional_confirmation"
+  },
+  "dataset": {
+    "kind": "nist_ur5",
+    "protocol": "cold_start_ood",
+    "processed_path": "dataset/nist_ur5/processed/nist_ur5_trials_v2.npz",
+    "forbidden_or_excluded_inputs": [
+      "target_joint_position_j1..j6",
+      "actual_joint_position_j1..j6",
+      "externally_measured_TCP_deviation_not_time_aligned",
+      "cold_start_regime_labels_at_validation_and_test_are_mapped_to_unknown"
+    ]
+  },
+  "window": {
+    "sequence_length": 125,
+    "prediction_length": 25,
+    "max_train_windows": 30000,
+    "max_validation_windows": 12000,
+    "max_test_windows": 12000
+  },
+  "discovery": {
+    "manifest_path": "results/manifests/nist_ur5.json",
+    "candidate_lags": [0, 1, 2, 4, 8, 16, 32, 64, 124],
+    "conditioning_target_lags": [0, 1, 4, 16, 64],
+    "max_samples": 40000,
+    "n_blocks": 5,
+    "ridge_alpha": 1.0,
+    "hac_bandwidth": 16,
+    "fdr_level": 0.05,
+    "minimum_effect": 0.015,
+    "minimum_stability": 0.6,
+    "maximum_pairs": 18,
+    "maximum_lags_per_feature": 1,
+    "minimum_regime_samples": 200,
+    "crossfit_within_segments": true,
+    "screening_horizon": 25
+  },
+  "model": {
+    "hidden_size": 32,
+    "target_hidden_size": 32,
+    "dropout": 0.1,
+    "target_probe_lags": [0, 1, 16, 64],
+    "d_model": 64,
+    "heads": 4,
+    "layers": 2,
+    "d_ff": 128,
+    "dlinear_kernel": 25,
+    "timesnet_d_model": 32,
+    "timesnet_d_ff": 32,
+    "timesnet_layers": 1,
+    "timesnet_top_k": 3,
+    "timesnet_num_kernels": 3
+  },
+  "training": {
+    "batch_size": 128,
+    "num_workers": 0,
+    "model_batch_sizes": {
+      "sf_cdi": 128,
+      "sf_cdi_self_supervised": 128,
+      "sf_cdi_closed_form": 128,
+      "itransformer": 64,
+      "dlinear": 128,
+      "timesnet": 128
+    },
+    "epochs": 18,
+    "model_epochs": {
+      "sf_cdi": 18,
+      "sf_cdi_self_supervised": 18,
+      "sf_cdi_closed_form": 18,
+      "itransformer": 30,
+      "dlinear": 30,
+      "timesnet": 30
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "patience": 5,
+    "model_patiences": {
+      "itransformer": 6,
+      "dlinear": 6,
+      "timesnet": 6
+    },
+    "gradient_clip": 1.0
+  },
+  "adversarial": {
+    "weight": 0.05,
+    "learning_rate": 0.001,
+    "steps": 1,
+    "warmup_epochs": 1
+  },
+  "shortcut": {
+    "covariance_weight": 0.05
+  },
+  "optimization": {
+    "main_steps": 3,
+    "driver_pretrain_epochs": 6,
+    "driver_encoder_pretrain_epochs": 3,
+    "driver_reconstruction_weight": 1.0,
+    "closed_form_residualizer_ridge": 0.001
+  },
+  "models": [
+    "sf_cdi",
+    "itransformer"
+  ]
+}

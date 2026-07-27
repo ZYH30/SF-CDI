@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0",
+  "method": "SF-CDI",
+  "result_snapshot": "paper-v1.0",
+  "primary_results": {
+    "nist_ur5": {
+      "seeds": [20260722, 20260723, 20260724, 20260725, 20260726],
+      "models": {
+        "sf_cdi": {
+          "mae": {"mean": 0.00148407, "sample_sd": 0.00001572},
+          "rmse": {"mean": 0.00207181, "sample_sd": 0.00001670}
+        },
+        "itransformer": {
+          "mae": {"mean": 0.00150535, "sample_sd": 0.00001693},
+          "rmse": {"mean": 0.00210181, "sample_sd": 0.00001857}
+        },
+        "dlinear": {
+          "mae": {"mean": 0.00193058, "sample_sd": 0.00002056},
+          "rmse": {"mean": 0.00256224, "sample_sd": 0.00001873}
+        },
+        "timesnet": {
+          "mae": {"mean": 0.00151071, "sample_sd": 0.00004856},
+          "rmse": {"mean": 0.00208682, "sample_sd": 0.00006514}
+        }
+      },
+      "sf_cdi_minus_itransformer_mae_ci95": [-0.00003259, -0.00000808],
+      "sf_cdi_minus_timesnet_mae_ci95": [-0.00006824, 0.00001559],
+      "sf_cdi_minus_itransformer_mae_by_horizon": [
+        -0.000019518908102721328,
+        -0.000010534379466844253,
+        -0.000006652537072492733,
+        -0.000004677916483039222,
+        -0.000009402051675078864,
+        -0.000016389230730002583,
+        -0.000012707954757263437,
+        -0.000010867196153071819,
+        -0.00000850125143624981,
+        -0.000013189812411080027,
+        -0.000021548811355053985,
+        -0.000027960991835819428,
+        -0.00002810504311834732,
+        -0.000029923565515097483,
+        -0.000032902369016513504,
+        -0.0000323150513767662,
+        -0.000034662221181073,
+        -0.00003680006727080354,
+        -0.000029401486541913392,
+        -0.000035257925635990726,
+        -0.00003471670622901312,
+        -0.000024987096751829086,
+        -0.000018993388946910275,
+        -0.000012428683193866111,
+        -0.000019641694645846026
+      ]
+    },
+    "metropt3": {
+      "seeds_primary": [20260724, 20260725, 20260726, 20260727, 20260728],
+      "seeds_dlinear_timesnet": [20260724, 20260725, 20260726],
+      "models": {
+        "sf_cdi_5_seed": {
+          "mae": {"mean": 0.059729, "sample_sd": 0.003779},
+          "rmse": {"mean": 0.126903, "sample_sd": 0.002660}
+        },
+        "target_lstm": {
+          "mae": {"mean": 0.072592, "sample_sd": 0.005638},
+          "rmse": {"mean": 0.146224, "sample_sd": 0.005232}
+        },
+        "itransformer": {
+          "mae": {"mean": 0.094102, "sample_sd": 0.003965},
+          "rmse": {"mean": 0.212518, "sample_sd": 0.003686}
+        },
+        "sf_cdi_3_seed": {
+          "mae": {"mean": 0.05741465, "sample_sd": 0.00178242},
+          "rmse": {"mean": 0.12593349, "sample_sd": 0.00325131}
+        },
+        "dlinear": {
+          "mae": {"mean": 0.14198486, "sample_sd": 0.00088642},
+          "rmse": {"mean": 0.27064664, "sample_sd": 0.00167224}
+        },
+        "timesnet": {
+          "mae": {"mean": 0.09898824, "sample_sd": 0.00677319},
+          "rmse": {"mean": 0.20962487, "sample_sd": 0.00359396}
+        }
+      },
+      "sf_cdi_minus_target_lstm_mae_ci95": [-0.016486, -0.009555],
+      "sf_cdi_minus_itransformer_mae_ci95": [-0.042049, -0.027504],
+      "sf_cdi_minus_target_lstm_mae_by_horizon": [
+        -0.0023585721174875897,
+        -0.004470298453172048,
+        -0.008568052327632905,
+        -0.009603091927369436,
+        -0.009978583216667176,
+        -0.010910858897368115,
+        -0.011522069517771402,
+        -0.012914750440915428,
+        -0.015174489716688794,
+        -0.019236251167456312,
+        -0.023293005029360454,
+        -0.026328668006261192
+      ],
+      "regime_mae": {
+        "off_or_unloaded": {
+          "windows": 4771,
+          "sf_cdi": 0.052762,
+          "target_lstm": 0.061225
+        },
+        "loaded": {
+          "windows": 1128,
+          "sf_cdi": 0.092843,
+          "target_lstm": 0.124089
+        },
+        "transition_or_other": {
+          "windows": 101,
+          "sf_cdi": 0.018996,
+          "target_lstm": 0.034414
+        }
+      }
+    }
+  },
+  "shortcut_control_ablation": {
+    "dataset": "MetroPT-3",
+    "settings": {
+      "none": {
+        "seeds": 3,
+        "adversarial_weight": 0.0,
+        "covariance_weight": 0.0,
+        "mae": {"mean": 0.079876, "sample_sd": 0.017457},
+        "rmse": {"mean": 0.165261, "sample_sd": 0.038340},
+        "blocked_probe_r2": {"mean": 0.834, "sample_sd": 0.028}
+      },
+      "default": {
+        "seeds": 5,
+        "adversarial_weight": 0.05,
+        "covariance_weight": 0.05,
+        "mae": {"mean": 0.063688, "sample_sd": 0.008533},
+        "rmse": {"mean": 0.128960, "sample_sd": 0.003825},
+        "blocked_probe_r2": {"mean": 0.726, "sample_sd": 0.094}
+      },
+      "strong": {
+        "seeds": 5,
+        "adversarial_weight": 0.2,
+        "covariance_weight": 0.2,
+        "mae": {"mean": 0.059729, "sample_sd": 0.003779},
+        "rmse": {"mean": 0.126903, "sample_sd": 0.002660},
+        "blocked_probe_r2": {"mean": 0.636, "sample_sd": 0.126}
+      }
+    },
+    "matched_joint_single_seed": {
+      "joint": {"mae": 0.059697, "rmse": 0.126602},
+      "static_freeze": {"mae": 0.057106, "rmse": 0.126713}
+    }
+  },
+  "strict_closed_form_variant": {
+    "dataset": "NIST UR5",
+    "seeds": 3,
+    "mae": {"mean": 0.00147923, "sample_sd": 0.00000362},
+    "rmse": {"mean": 0.00206160, "sample_sd": 0.00000823},
+    "sf_cdi_minus_itransformer_mae_ci95": [-0.00002645, -0.00000620],
+    "full_token_probe_r2": 0.294
+  },
+  "strict_self_supervised_variant": {
+    "dataset": "NIST UR5",
+    "seed": 20260722,
+    "mae": 0.0014776781,
+    "rmse": 0.0020611286,
+    "full_token_probe_r2": 0.3817151
+  },
+  "stress_tests": {
+    "nist_ur5": {
+      "clean": {"mae": 0.0014840685, "rmse": 0.0020718096, "mae_change_percent": 0.0},
+      "gaussian_0.10": {"mae": 0.0016724466, "rmse": 0.0023700185, "mae_change_percent": 12.7049},
+      "block_missing_0.20": {"mae": 0.0016035196, "rmse": 0.0022781799, "mae_change_percent": 8.0466},
+      "top_driver_removed": {"mae": 0.0015059417, "rmse": 0.0020920344, "mae_change_percent": 1.4733},
+      "bottom_driver_removed": {"mae": 0.0015235600, "rmse": 0.0021175077, "mae_change_percent": 2.6579},
+      "all_drivers_removed": {"mae": 0.0020707108, "rmse": 0.0027490341, "mae_change_percent": 39.5371}
+    },
+    "metropt3": {
+      "clean": {"mae": 0.0597290149, "rmse": 0.1269032261, "mae_change_percent": 0.0},
+      "gaussian_0.10": {"mae": 0.0604491034, "rmse": 0.1279965659, "mae_change_percent": 1.1910},
+      "block_missing_0.20": {"mae": 0.0609684535, "rmse": 0.1282340053, "mae_change_percent": 2.1012},
+      "top_driver_removed": {"mae": 0.0646371756, "rmse": 0.1408697645, "mae_change_percent": 8.2244},
+      "bottom_driver_removed": {"mae": 0.0644930541, "rmse": 0.1341417381, "mae_change_percent": 8.2618},
+      "all_drivers_removed": {"mae": 0.1152373316, "rmse": 0.2198985645, "mae_change_percent": 93.4662}
+    }
+  },
+  "semisynthetic": {
+    "seeds": 10,
+    "true_pairs": ["D1@2", "D2@6", "D3@12"],
+    "lagged_gcm": {
+      "pair_f1": {"mean": 0.966667, "sample_sd": 0.105409},
+      "exact_lag_accuracy": {"mean": 0.966667, "sample_sd": 0.105409},
+      "shortcut_selection_rate": 0.1
+    },
+    "marginal_top3": {
+      "pair_f1": {"mean": 0.666667, "sample_sd": 0.0},
+      "exact_lag_accuracy": {"mean": 0.666667, "sample_sd": 0.0},
+      "shortcut_selection_rate": 1.0
+    },
+    "forecast": {
+      "target_only": {"mae": 0.503641, "rmse": 1.103924},
+      "all_variables_all_lags": {"mae": 0.481883, "rmse": 0.925908},
+      "marginal_top3": {"mae": 0.517193, "rmse": 1.068735},
+      "gcm_selected": {"mae": 0.451024, "rmse": 1.004234},
+      "oracle_drivers": {"mae": 0.451289, "rmse": 1.000273}
+    }
+  },
+  "historically_exposed_confirmations": {
+    "nist_cold_full": {
+      "sf_cdi": {"mae": 0.002048, "rmse": 0.003123},
+      "itransformer": {"mae": 0.002110, "rmse": 0.003197}
+    },
+    "metropt3_final_20_percent": {
+      "sf_cdi": {"mae": 0.058198, "rmse": 0.114996},
+      "target_lstm": {"mae": 0.062069, "rmse": 0.134779}
+    }
+  }
+}

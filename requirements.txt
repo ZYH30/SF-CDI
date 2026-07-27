@@ -1,0 +1,8 @@
+numpy==2.1.2
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.9.0
+einops==0.8.2
+reformer-pytorch==1.4.4
+matplotlib==3.10.6
+pytest==9.1.1

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sf-cdi"
+version = "1.0.0"
+description = "Static-Frozen Causal Driver Innovation for multi-horizon mechanical forecasting"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {file = "LICENSE"}
+authors = [
+  {name = "ZYH30"}
+]
+keywords = [
+  "time-series forecasting",
+  "causal discovery",
+  "mechanical systems",
+  "distribution shift"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+  "numpy==2.1.2",
+  "pandas==3.0.3",
+  "scipy==1.17.1",
+  "scikit-learn==1.9.0",
+  "torch==2.5.1",
+  "einops==0.8.2",
+  "reformer-pytorch==1.4.4"
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib==3.10.6"]
+test = ["pytest==9.1.1"]
+
+[project.urls]
+Repository = "https://github.com/ZYH30/SF-CDI"
+
+[tool.setuptools.packages.find]
+include = ["sfcdi*"]
+
+[tool.setuptools.package-data]
+"sfcdi.vendor.tslib" = ["LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

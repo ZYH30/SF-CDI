@@ -1,0 +1,116 @@
+{
+  "seed": 20260724,
+  "device": "cuda",
+  "output_root": "outputs",
+  "evaluation": {
+    "split": "validation",
+    "purpose": "paper_shortcut_control_ablation_default_weights"
+  },
+  "dataset": {
+    "kind": "metropt3",
+    "csv_path": "dataset/metropt3/raw/MetroPT3(AirCompressor).csv",
+    "target": "Reservoirs",
+    "max_gap_seconds": 30.0,
+    "forbidden_or_excluded_inputs": [
+      "Unnamed: 0",
+      "timestamp",
+      "TP3_near_duplicate_target_proxy",
+      "future_valve_or_control_states"
+    ]
+  },
+  "split": {
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2
+  },
+  "window": {
+    "sequence_length": 60,
+    "prediction_length": 12,
+    "max_train_windows": 30000,
+    "max_validation_windows": 6000,
+    "max_test_windows": 6000
+  },
+  "discovery": {
+    "manifest_path": "results/manifests/metropt3.json",
+    "candidate_lags": [0, 1, 2, 3, 6, 12, 30, 59],
+    "conditioning_target_lags": [0, 1, 2, 6, 12],
+    "max_samples": 50000,
+    "n_blocks": 5,
+    "ridge_alpha": 1.0,
+    "hac_bandwidth": 12,
+    "fdr_level": 0.05,
+    "minimum_effect": 0.015,
+    "minimum_stability": 0.6,
+    "maximum_pairs": 12,
+    "maximum_lags_per_feature": 2,
+    "minimum_regime_samples": 200,
+    "crossfit_within_segments": true,
+    "screening_horizon": 12
+  },
+  "model": {
+    "hidden_size": 32,
+    "target_hidden_size": 32,
+    "dropout": 0.1,
+    "target_probe_lags": [0, 1, 6, 12],
+    "d_model": 64,
+    "heads": 4,
+    "layers": 2,
+    "d_ff": 128,
+    "dlinear_kernel": 25,
+    "timesnet_d_model": 32,
+    "timesnet_d_ff": 32,
+    "timesnet_layers": 1,
+    "timesnet_top_k": 3,
+    "timesnet_num_kernels": 3
+  },
+  "training": {
+    "batch_size": 128,
+    "num_workers": 0,
+    "model_batch_sizes": {
+      "sf_cdi": 128,
+      "sf_cdi_no_control": 128,
+      "sf_cdi_joint": 128,
+      "target_lstm": 128,
+      "itransformer": 128,
+      "dlinear": 128,
+      "timesnet": 128
+    },
+    "epochs": 18,
+    "model_epochs": {
+      "sf_cdi": 18,
+      "sf_cdi_no_control": 18,
+      "sf_cdi_joint": 18,
+      "target_lstm": 18,
+      "itransformer": 30,
+      "dlinear": 30,
+      "timesnet": 30
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "patience": 5,
+    "model_patiences": {
+      "itransformer": 6,
+      "dlinear": 6,
+      "timesnet": 6
+    },
+    "gradient_clip": 1.0
+  },
+  "adversarial": {
+    "weight": 0.05,
+    "learning_rate": 0.001,
+    "steps": 1,
+    "warmup_epochs": 1
+  },
+  "shortcut": {
+    "covariance_weight": 0.05
+  },
+  "optimization": {
+    "main_steps": 3,
+    "driver_pretrain_epochs": 6,
+    "driver_encoder_pretrain_epochs": 3,
+    "driver_reconstruction_weight": 1.0,
+    "closed_form_residualizer_ridge": 0.001
+  },
+  "models": [
+    "sf_cdi"
+  ]
+}

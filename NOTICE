@@ -1,0 +1,13 @@
+SF-CDI includes selected baseline and neural-layer implementations derived
+from THUML Time-Series-Library:
+
+  https://github.com/thuml/Time-Series-Library
+
+Those files are located under sfcdi/vendor/tslib and remain subject to the
+upstream MIT license included in sfcdi/vendor/tslib/LICENSE:
+
+  Copyright (c) 2021 THUML @ Tsinghua University
+
+The SF-CDI experiment pipeline, causal-driver discovery, static-freeze
+training, stress evaluation, and semi-synthetic validation are distributed
+under the repository-level MIT license.
